@@ -85,3 +85,24 @@ export function getCustomerResponseList(data) {
         payload: Axios.get(config.endpoints.bookings+"/customerResponse", {params: data})
     }
 }
+
+export function saveCustomerExcel(fileData){
+    return{
+        type: bookingConstants.API_EXPORT_EXCEL_DATA,
+        payload: Axios.post(config.endpoints.customerImports, fileData)
+    }
+}
+
+export function getCustomerExcelStatus(params){
+    return{
+        type: bookingConstants.API_GET_CUSTOMER_EXCEL_STATUS,
+        payload: Axios.get(config.endpoints.customerImports, {params: params})
+    }
+}
+
+export function setExcelData(data){
+    return{
+        type: bookingConstants.UI_SET_EXCEL_DATA,
+        payload: data
+    }
+}

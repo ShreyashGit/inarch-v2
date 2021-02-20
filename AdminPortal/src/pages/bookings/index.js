@@ -12,6 +12,7 @@ import qs from 'querystring';
 import Axios from "axios";
 import {config} from "../../config";
 import * as Alerts from "../../components/common/Alert";
+import {Modal, ModalBody, ModalHeader, FormGroup,Input, Label, Progress} from "reactstrap";
 
 const bookingStates = Utility.getBookingStates();
 
@@ -22,7 +23,9 @@ class Bookings extends React.Component {
         this.state = {
             activeTab: "Fresh call",
             searchText: "",
-            resetSearch: false
+            resetSearch: false,
+            showExcelModal: false,
+            excelUploading: false
         };
     }
 
@@ -208,6 +211,100 @@ class Bookings extends React.Component {
             </div>);
     }
 
+    initializeExcelData(){
+        this.setState({showExcelModal: false, excelUploading: false});
+        let excelData = {
+            fileId: "",
+            totalRecords: 0,
+            progress: 0,
+            status: "importing"
+        };
+        this.props.bookingActions.setExcelData(excelData);
+        window.location.reload();
+    }
+
+    showExcelUploadModal(){
+        this.setState({showExcelModal: true})
+    }
+
+    async getCustomerExcelStatus(){
+        try{
+            let {excelData} = this.props.booking;
+            console.log("EDD: ", excelData);
+            await this.props.bookingActions.getCustomerExcelStatus({fileId: excelData.fileId})
+
+            let {status} = this.props.booking.excelData;
+            if(status === "importing"){
+                setTimeout( () => {
+                    this.getCustomerExcelStatus();
+                },5000);
+            }
+        }
+        catch{
+            Alerts.error("Something went wrong", "Please try again later.");
+            this.initializeExcelData();
+        }
+    }
+
+    async uploadExcelFile(){
+        try{
+            const formData = new FormData();
+            formData.append(
+                "file",
+                this.state.uploadedExcelFile,
+                this.state.uploadedExcelFile.name
+            );
+            this.setState({excelUploading: true});
+            await this.props.bookingActions.saveCustomerExcel(formData);
+
+            setTimeout(() => {
+                this.getCustomerExcelStatus();
+            },2000);
+        }
+        catch{
+            this.initializeExcelData();
+            Alerts.error("Something went wrong", "Please try again later.");
+        }
+    }
+
+    uploadFile(e){
+        let file = e.target.files[0];
+        if (file.name.lastIndexOf('.xlsx') === -1) {
+            Alerts.error("Something went wrong", "Only [.xlsx] format is allowed");
+            return;
+        }
+        this.setState({uploadedExcelFile: file});
+    }
+
+    getExcelImportModel(){
+        let {showExcelModal, excelUploading, uploadedExcelFile} = this.state;
+        let {excelData} = this.props.booking;
+
+        return (
+            <Modal className="excel-model payment-modal position-relative " size={"sm"} isOpen={showExcelModal} backdrop="static">
+                <ModalHeader className="p-0 font-weight-bolder">
+                    Export customer data
+                </ModalHeader>
+                { !excelUploading && <ModalBody className="p-0 mt-3">
+                    <FormGroup>
+                        <Label for="productFile">Upload file</Label>
+                        <Input type="file" name="productFile" onChange={this.uploadFile.bind(this)} placeholder="Upload file" />
+                    </FormGroup>
+                    <div className="text-right mt-3">
+                        <button className="btn btn-primary mr-2"  disabled={!uploadedExcelFile} onClick={this.uploadExcelFile.bind(this)}>Upload</button>
+                        <button className="btn btn-primary" onClick={() => this.setState({showExcelModal: false})}>Cancel</button>
+                    </div>
+                </ModalBody>}
+                { excelUploading && <ModalBody className="p-0 mt-3">
+                    <h5 className="mb-1">{excelData.status.charAt(0).toUpperCase() + excelData.status.slice(1) + (excelData.status === "importing" ? "..." : "")}</h5>
+                    <Progress className="mb-1 progress-bar-effect" value={Number(excelData.progress)/Number(excelData.totalRecords) * 100} color="success"/>
+                    <div className=" font-12">{excelData.progress}/{excelData.totalRecords}</div>
+                    <button className="btn btn-primary mt-2 float-right" disabled={excelData.status === "importing"} onClick={this.initializeExcelData.bind(this)}>OK</button>
+                </ModalBody>}
+            </Modal>
+        );
+    }
+
     render() {
         let {activeTab, searchText} = this.state;
         let bookingStatusList = bookingStates;
@@ -221,13 +318,18 @@ class Bookings extends React.Component {
                         <h5 className="mb-0 font-weight-bolder ">Customers</h5>
                         <p className="mb-0 text-gray-400">All important information at a glance</p>
                     </div>
-                    <button className="btn btn-primary px-3 py-2"
-                            onClick={() => {
-                                this.props.bookingActions.setInitialState();
-                                this.props.history.push("/customer/new");
-                            }
-                            }>Add new
-                    </button>
+                    <div>
+                        <button className="btn btn-primary px-3 py-2 mr-3" onClick={this.showExcelUploadModal.bind(this)}>
+                            Upload Excel
+                        </button>
+                        <button className="btn btn-primary px-3 py-2"
+                                onClick={() => {
+                                    this.props.bookingActions.setInitialState();
+                                    this.props.history.push("/customer/new");
+                                }
+                                }>Add new
+                        </button>
+                    </div>
                 </header>
 
                 <div className="filter-group mb-4">
@@ -255,6 +357,7 @@ class Bookings extends React.Component {
                         </div>
                     </div>
                     {this.getBookingList()}
+                    {this.getExcelImportModel()}
                 </div>
             </div>
         );

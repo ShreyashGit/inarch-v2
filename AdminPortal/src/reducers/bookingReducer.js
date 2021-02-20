@@ -16,6 +16,12 @@ let initialState = {
     },
         recordsTotalCustomerRes: 0,
         recordsCustomerRes: [],
+        excelData: {
+            fileId: "",
+            totalRecords: 0,
+            progress: 0,
+            status: "importing"
+        }
     }
 ;
 
@@ -24,12 +30,15 @@ export const bookingReducer = createReducer(initialState, {
     [bookingConstants.UI_SET_CURRENT_BOOKING_PAGE]: setCurrentPage,
     [bookingConstants.UI_SET_BOOKING_INITIAL_STATE]: setInitialState,
     [bookingConstants.UI_SET_INITIAL_CUSTOMER_DATA]: setInitialCustomerData,
+    [bookingConstants.UI_SET_EXCEL_DATA]: setExcelData,
 
     [bookingConstants.API_GET_BOOKING_LIST + "_FULFILLED"]: getBookingList,
     [bookingConstants.API_GET_BOOKING_BY_ID + "_FULFILLED"]: getBookingById,
     [bookingConstants.API_ADD_BOOKING + "_FULFILLED"]: setInitialState,
     [bookingConstants.API_UPDATE_BOOKING + "_FULFILLED"]: setInitialState,
     [bookingConstants.API_GET_CUSTOMER_RESPONSE + "_FULFILLED"]: getCustomerResponseList,
+    [bookingConstants.API_EXPORT_EXCEL_DATA + "_FULFILLED"]: getUploadedFileData,
+    [bookingConstants.API_GET_CUSTOMER_EXCEL_STATUS + "_FULFILLED"]: getFileUploadProgressData
 });
 function setInitialState(state) {
     return {
@@ -145,5 +154,35 @@ function getCustomerResponseList(state, {payload}){
         ...state,
         recordsTotalCustomerRes: payload.data.recordsTotal,
         recordsCustomerRes: payload.data.records
+    }
+}
+
+function getUploadedFileData(state, {payload}){
+    return{
+        ...state,
+        excelData: {
+            fileId: payload.data.fileId,
+            totalRecords: payload.data.totalRecords,
+            status: payload.data.status,
+            progress: payload.data.progress
+        }
+    }
+}
+
+function getFileUploadProgressData(state, {payload}){
+    return{
+        ...state,
+        excelData: {
+            ...state.excelData,
+            status: payload.data.status,
+            progress: payload.data.progress
+        }
+    }
+}
+
+function setExcelData(state, {payload}){
+    return{
+        ...state,
+        excelData: payload
     }
 }

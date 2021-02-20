@@ -147,6 +147,22 @@ let BookingSchema = new Schema({
     status:  {
         type: String,
         trim: true
+    },
+    cubic_capacity: {
+        type: String,
+        trim: true
+    },
+    gross_vehicle_weight: {
+        type: String,
+        trim: true
+    },
+    vehicle_class: {
+        type: String,
+        trim: true
+    },
+    fuel_type: {
+        type: String,
+        trim: true
     }
 
 }, { timestamps: true });

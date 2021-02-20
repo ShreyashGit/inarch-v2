@@ -51,7 +51,7 @@ require('./routes/settlement.server.routes')(app);
 require('./routes/payment.server.routes')(app);
 require('./routes/division.server.routes')(app);
 require('./routes/userMapping.server.routes')(app);
-require('./routes/productImport.server.routes')(app);
+require('./routes/customerImport.server.routes')(app);
 require('./routes/hdfc.server.routes')(app);
 require('./routes/paymentSetting.server.routes')(app);
 require('./routes/reports.server.routes')(app);
