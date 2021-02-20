@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <title>Payment Receipt</title>
+    <style>
+        body {
+            margin: 0;
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+            padding: 10px 20px 3px 20px;
+        }
+
+        .center {
+            text-align: center !important;
+        }
+
+        .right {
+            text-align: right !important;
+        }
+
+        .m-0 {
+            margin: 0;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .mt-1 {
+            margin-top: .5rem !important;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #dfdfdf;
+        }
+
+        .border-top {
+            border-top: 1px solid #dfdfdf;
+        }
+
+        b, h4 {
+            color: #222222;
+        }
+
+        .header {
+            padding: 0 0 15px;
+            position: relative;
+        }
+
+        .footer {
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .row {
+            text-align: center;
+        }
+
+        .row > div {
+            display: inline-block;
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .w-half {
+            width: 47%;
+            text-align: left;
+        }
+
+        .w-quart {
+            width: 30%;
+            text-align: left;
+        }
+
+        .w-3quart {
+            width: 63%;
+            text-align: left;
+        }
+
+        .water-mark-bg {
+            position: absolute;
+            z-index: -5;
+            background: white;
+            display: block;
+            min-height: 50%;
+            min-width: 50%;
+            left: 120px;
+            bottom: 30px;
+            font-size: 30%;
+        }
+
+        .water-mark-text {
+            color: #f3f3f3;
+            pointer-events: none;
+            font-size: 80px;
+            transform: rotate(330deg);
+            -webkit-transform: rotate(330deg);
+        }
+        .p-0{
+            padding: 0!important;
+        }
+        .f-14 {
+            font-size: 58% !important;
+        }
+        .water-mark-red{
+            color: #FF0000;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="f-14">
+<div class="water-mark-bg">
+     ${waterMark}
+</div>
+<div class="container">
+    <div class="header border-bottom">
+        <div class="center">
+            <div class="m-0" style="color: #e70323 !important;font-size: 20px; font-weight: bold;">${headerTitle}</div>
+            <h3 class="mb-0 mt-1"><span class="border-bottom">PAYMENT RECEIPT</span></h3>
+        </div>
+    </div>
+    <div class="row border-bottom " style="margin-bottom: 8px;">
+        <div class="w-half">
+            <span><b>Receipt No. : </b>${receiptNo}</span>
+        </div>
+        <div class="w-half right">
+            <span><b>Date : </b>${receiptDate}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Booking No</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${bookingNo}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Division Name</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${divName}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Customer Name</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${customerName}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Mobile No.</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${phoneNo}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>District</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${district}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Taluka</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${taluka}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Village</b></span>
+        </div>
+        <div class="w-3quart p-0" >
+            <span><b>:</b> ${village}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Customer Full Address</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${customerAddress}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Reference No</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${referenceId}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Payment Mode</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${paymentMode}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Total Amount paid</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> Rs. ${transactionAmount}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Online transaction charges @ ${interest}%</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> Rs. ${ConvenienceCharges}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Total Amount Received</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> Rs. ${totalAmtReceived}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-quart p-0">
+            <span><b>Total Amount Received in Words</b></span>
+        </div>
+        <div class="w-3quart p-0">
+            <span><b>:</b> ${amountInWords}</span>
+        </div>
+    </div>
+    <div class="center">
+        <div style="margin-top: 18px;font-size: 8px" ;>
+            <b>For ONLINE mode of payment no signature required. For CASH mode of payment, Stamp, Signature & Hologram of the company is compulsory</b>
+        </div>
+    </div>
+    <div class="footer border-top mt-1">
+        <div style="padding-left: 20px; padding-right: 20px; font-size: 60%;">
+            <p class="m-0"><b>Terms and Conditions:</b></p>
+            <ol class="mt-1" style="padding-left: 12px; padding-right: 12px;">
+                ${termsCondition}
+                <!-- <li>Cheques / Pay orders are to subject realisation</li>
+                <li>Prices are prevailing at the time of delivery will be charged.</li>
+                <li>All disputes arising between the parties here to shall be reffered to arbitration according to the Arbitration Laws of the country. For disputes, if any only the courts of <b>YAVATMAL</b> shall have the jurisdiction.</li> -->
+            </ol>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+@import '../../assets/css/global';
+@import '../../assets/css/_mixin.scss';
+
+$bookingStatus: (
+    "1":#0e6d2a,
+    "2":#5fbc7b ,
+    "3": #ff1020,
+    "4":#ff3030,
+    "6":#ff3030
+);
+
+@each $name, $color in $bookingStatus {
+    .booking-#{$name} {
+        background-color: $color !important;
+  }
+}

@@ -1,0 +1,93 @@
+@import "../css/global.scss";
+$swal2-width: 32em !important;
+$swal2-font-size: 16px !important;
+$swal2-title-font-size: 18px !important;
+$swal2-close-button-font-size: 22px !important;
+@import '~sweetalert2/src/sweetalert2.scss';
+/***********custom-alert-popup*******/
+.custom-alert-popup{
+  padding: 0 !important;
+}
+.custom-alert-popup .swal2-header{
+  border-radius: 4px;
+  background-color: rgba(235,235,235, 0.54);
+  color: #535353 !important;
+  padding: 1em 1.5em;
+}
+.custom-alert-popup .swal2-content{
+  padding: 1em 1.5em;
+  color: #787878;
+  line-height: 1.5rem;
+}
+.custom-alert-popup .swal2-actions{
+  margin: 1.25em 0;
+  justify-content: flex-end;
+  padding: 0 15px;
+}
+.custom-alert-popup #swal2-content{
+  text-align: left;
+}
+.custom-alert-popup .swal2-cancel, .custom-alert-popup .swal2-confirm{
+  padding: 5px 20px;
+}
+.custom-alert-popup .swal2-close{
+  line-height: 1.8;
+  color: #535353;
+  right: 6px;
+  top: 6px;
+  font-weight: bold;
+}
+.custom-alert-popup .swal2-title{
+  margin: 0;
+  font-weight: 500;
+  align-self: flex-start;
+}
+/*********end-custom-alert-popup*********/
+/*----Changes to show radio buttons in reminder popyp----*/
+.swal2-radio{
+  flex-direction: column;
+}
+.swal-radio > label {
+  min-width: 107px;
+}
+/*------------------------------------------------------*/
+/*********error-alert-popup*********/
+.error-alert-popup{
+  padding: 0 !important;
+}
+.error-alert-popup .swal2-header{
+  border-radius: 4px;
+  background-color: rgba(235,235,235, 0.54);
+  color: #ffffff !important;
+  padding: 1em 1.5em;
+}
+.error-alert-popup .swal2-content{
+  padding: 1em 1.5em;
+  color: #787878;
+  line-height: 1.5rem;
+}
+.error-alert-popup .swal2-actions{
+  margin: 1.25em 0;
+  justify-content: flex-end;
+  padding: 0 15px;
+}
+.error-alert-popup #swal2-content{
+  text-align: left;
+}
+.error-alert-popup .swal2-cancel, .error-alert-popup .swal2-confirm{
+  padding: 5px 20px;
+}
+.error-alert-popup .swal2-close{
+  line-height: 1.8;
+  color: #535353;
+  right: 6px;
+}
+.error-alert-popup .swal2-title{
+  margin: 0;
+  font-weight: 500;
+  align-self: flex-start;
+}
+.error-alert-popup .swal2-header .swal2-icon{
+  display: none!important;
+}
+/*********end-error-alert-popup*********/

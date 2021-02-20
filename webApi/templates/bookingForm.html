@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <title>Booking Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-size: 14px !important;
+            font-family: 'Roboto', sans-serif;
+            padding: 0 20px 20px;
+        }
+        .center {
+            text-align: center !important;
+        }
+        .right {
+            text-align: right !important;
+        }
+        .m-0 {
+            margin: 0;
+        }
+        .mb-0 {
+            margin-bottom: 0;
+        }
+        .mb-1 {
+            margin-bottom: .5rem;
+        }
+        .mt-0 {
+            margin-top: 0;
+        }
+        .mt-1 {
+            margin-top: .5rem;
+        }
+        .pt-1 {
+            padding-top: .5rem;
+        }
+        .pb-1 {
+            padding-bottom: .5rem;
+        }
+        .border-bottom {
+            border-bottom: 1px solid #dfdfdf;
+        }
+        .border-top {
+            border-top: 1px solid #dfdfdf;
+        }
+        .header {
+            padding: 0 15px 15px 15px;
+            position: relative;
+        }
+        .footer{
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+        .header .right {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        .row {
+            text-align: center;
+        }
+        .row > div {
+            display: inline-block;
+            padding: 5px;
+            vertical-align: top;
+        }
+        .w-half {
+            width: 47%;
+            text-align: left;
+        }
+        .card {
+            padding: 5px;
+            border: 0.08rem solid #dfdfdf;
+            border-radius: 2px;
+        }
+        .list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .d-inline-block {
+            display: inline-block;
+        }
+        .water-mark-bg{
+            position:absolute;
+            z-index:-5;
+            background:white;
+            display:block;
+            min-height:50%;
+            min-width:50%;
+            left: 120px;
+            bottom:150px;
+            pointer-events: none;
+        }
+        .water-mark-text {
+            color:#f3f3f3;
+            font-size:100px;
+            transform:rotate(330deg);
+            -webkit-transform:rotate(330deg);
+        }
+        .f-14{
+            font-size: 50%!important;
+        }
+        .water-mark-red{
+            color: #FF0000;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="f-14">
+    <div class="water-mark-bg">
+        ${waterMark}
+    </div>
+    <div class="container">
+        <div class="header border-bottom">
+            <div class="center">
+                <h1 class="m-0">${headerTitle}</h1>
+                <h3 class="mb-0 mt-0"><span class="border-bottom">BOOKING FORM</span></h3>
+            </div>
+        </div>
+        <div class="row border-bottom " style="margin-bottom: 10px;">
+            <div class="w-half">
+                <span><b>Booking No : </b>${bookingNo}</span>
+            </div>
+            <div class="w-half right">
+                <span><b>Booking Date : </b>${bookingDate}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="w-half">
+                <div class="card">
+                    <h4 class="mt-0"><span class="border-bottom">Customer</span></h4>
+                    <p class="m-0"><b>Name : </b> ${customerName}</p>
+                    <p class="m-0"><b>Mobile : </b> ${phoneNo}</p>
+                    <p class="m-0"><b>Email : </b> ${emailId}</p>
+                    <p class="m-0"><b>Gender : </b> ${gender}</p>
+                    <p class="m-0"><b>Date of Birth : </b> ${dateOfBirth}</p>
+                    <p class="m-0"><b>District : </b> ${district}</p>
+                    <p class="m-0"><b>Taluka : </b> ${taluka}</p>
+                    <p class="m-0"><b>Village : </b> ${village}</p>
+                    <p class="m-0"><b>Address : </b> ${customerAddress}</p>
+                    <p class="m-0"><b>Booking Source:</b> ${bookingSource}</p>
+                </div>
+                <br />
+                <div class="card">
+                    <h4 class="mt-0"><span class="border-bottom">Model</span></h4>
+                    <p class="m-0"><b>Type : </b> ${vehicleType}</p>
+                    <p class="m-0"><b>Model : </b> ${modelName}</p>
+                    <p class="m-0"><b>Variant : </b> ${variantName}</p>
+                    <p class="m-0"><b>Color : </b> ${colorName}</p>
+                </div>
+                <br />
+                ${description}
+
+            </div>
+            <div class="w-half">
+                <div class="card">
+                    <h4 class="mt-0"><span class="border-bottom">Price</span></h4>
+                    <ul class="list">
+                        <li class="border-bottom mb-1">
+                            <span class="w-half d-inline-block"><b>Type</b></span>
+                            <span class="w-half d-inline-block right"><b>Amount(Rs.)</b></span>
+                        </li>
+                        ${priceList}
+                        <li class="border-bottom mt-1">
+                            <span class="w-half d-inline-block"><b>Default Accessories</b></span>
+                        </li>
+                        ${defaultAccList}
+                        ${extraAccList}
+                        <li class="mb-1 mt-1">
+                            <span class="w-half d-inline-block"><b>Accessories Total</b></span>
+                            <span class="w-half d-inline-block right"><b>&#8377; ${totalAccessoriesPrice}</b></span>
+                        </li>
+                        <li class="pt-1 border-top">
+                            <span class="w-half d-inline-block"><b>Quantity</b></span>
+                            <span class="w-half d-inline-block right"><b>${quantity}</b></span>
+                            <span class="w-half d-inline-block"><b>Grand Total</b></span>
+                            <span class="w-half d-inline-block right"><b>&#8377; ${grandTotal}</b></span>
+                        </li>
+                        ${financeOption}
+                        ${excDetail}
+                        ${specialDiscount}
+                        ${bookingPaymentDetails}
+                        ${paymentList}
+                        <li class="pb-1 pt-1 mt-1 border-top">
+                            <span class="w-half d-inline-block"><b>Balance Amount</b></span>
+                            <span class="w-half d-inline-block right"><b>&#8377; ${balanceAmount}</b></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="center">
+            <div style="margin-top: 18px;" >
+                <b>This is computer generated booking form no signature required</b>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="footer border-top">
+            <div style="padding-left: 20px; padding-right: 20px; font-size: 60%;">
+                <p class="m-0"><b>Terms and Conditions:</b></p>
+                <ol class="mt-1" style="padding-left:0">
+                    ${termsCondition}
+                    <!-- <li>Vehicle prices, Taxes , Duties & any other Govt Levies, R.T.O., Insurance, Octroi, Road tax, accessories, etc. are payable by you & are subject to change without notice & those ruling at the time of invoicing alone will be applicable.
+                    </li>
+                    <li>Payment for all the above item will be by <b>Demand Draft/Online Transfer/Cash</b> favouring <b>MAC Vehicles Pvt Ltd</b> payable at <b>Yavatmal.</b></li>
+                    <li>Payments terms – 100% to be made in the name of <b>MAC Vehicles Pvt Ltd</b> by cheque/ draft/cash which is subject to realization in account. <br/><b>For online transfer/cash deposit</b>: Account Name: <b>MAC Vehicles Pvt Ltd,</b> Bank Name: <b>HDFC Bank Ltd,</b> Account No.: <b>10172560000054,</b> IFSC Code: <b> HDFC0001017</b>.
+                    </li>
+                    <li>We are not responsible for any cash payment made to our Employees/Broker. Cash payment should be made only at the authorized cash counters / deposit in account of <b>MAC Vehicles Pvt Ltd</b> mentioned above. An official stamped receipt should be collected immediately. Pan card copy must be produced for making cash payment.</li>
+                    <li>Booking cancellation Refund : 100% booking refund if intimated with acknowledged written application in the name of company <b>"MAC Vehicles Pvt Ltd"</b> or Email to <b>customercare@raajvihonda.com</b> within 3 days of the booking.</li>
+                    <li>Booking Cancellation charges: As per above booking cancellation refund policy, if not intimited within 3 days of booking, cancellation charges Rs. 1000 or 5% of booking amount whichever is higher will be applicable.</li>
+                    <li>Expected delivery: As early as possible from our showroom, on receipt of full payment of vehicle, insurance, RTO Tax & any other related charges.</li>
+                    <li>Adherence to expected date of delivery is subject to timely submission of documents and timely payment by the buyer and may get affected due to causes outside dealers control.</li>
+                    <li>The company shall not be liable & responsible for any loss/damage incurred by you due to any prevention, hindrance or delay in manufacturer delivery of vehicle or accessories, shortage of material, strike, riots, accident, machinery breakdown, government policies, acts of GOD & nature, and all events which are beyond company's (MAC Vehicles Pvt Ltd) control.</li>
+                    <li>Acceptance and advance deposit by the seller is merely an indication of an intention to sell and does not result in to a contract of sell.</li>
+                    <li>Payment for purchase of vehicle made by you to us is our own liability & our principles <b>Tata Motors Pvt Ltd</b> are in no way, explicitly or implicitly, responsible for any vicarious liability for the refund of any advance of delivery of vehicle there of as they deal with us on a Principal to Principal basis.</li>
+                    <li>All disputes arising between the parties here to shall be reffered to arbitration according to the Arbitration Laws of the country. For disputes, if any only the courts of <b>YAVATMAL</b> shall have the jurisdiction.</li>
+                    <li>The Seller shall have a general line on the goods for all money due to seller from the buyer on account this or other transaction.</li>
+                    <li>GST, RTO Tax & other levies applicable as per Govt as time of vehicle purchase.</li>
+                    <li>All the above Terms & Conditions of Sales are subject to change without notice.</li> -->
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

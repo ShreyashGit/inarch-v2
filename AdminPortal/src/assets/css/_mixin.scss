@@ -1,0 +1,122 @@
+@import '_global.scss';
+
+// generate 1px solid border with
+// given color and border radius 4px
+
+@mixin border($borderColor, $borderWidth: 1px, $borderStyle: solid, $border-radius: 4px) {
+  border: $borderWidth $borderStyle $borderColor;
+  border-radius: $border-radius;
+}
+
+@mixin calculate-height($subtractHeight: 58px) {
+  height: calc(100vh - #{$subtractHeight});
+}
+
+@mixin set-height($height, $setLineHeight: true) {
+  height: $height;
+  @if $setLineHeight {
+    line-height: $height;
+  }
+}
+
+@mixin set-margin($factor, $direction: "all") {
+  @if $direction == "all"{
+    margin: $factor * $spacer;
+  } @else if $direction == "top" {
+    margin-top: $factor * $spacer;
+  } @else if $direction == "bottom" {
+    margin-bottom: $factor * $spacer;
+  } @else if $direction == "left" {
+    margin-left: $factor * $spacer;
+  } @else if $direction == "right" {
+    margin-right: $factor * $spacer;
+  }
+}
+
+@mixin background-image($url, $size: 0, $height: 0) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @if($size != 0) {
+    background-size: $size;
+  }
+
+  @if($height !=0) {
+    height: $height;
+  }
+
+}
+
+@mixin button-style($background, $border, $hover-background: darken($background, 7.5%), $color: #333333, $hover-color: $color){
+  color: $color;
+  background-color: $background;
+
+  @include border($border);
+
+  &:hover, &:active, &:focus{
+    color: $hover-color;
+  }
+
+  border-color: $border;
+
+  &:hover {
+    background-color:  $hover-background;
+    border-color: $border;
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    background-color: $background;
+    border-color: $border;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    background-color: $hover-background;
+    border-color: $border;
+  }
+}
+
+@mixin display($display){
+  display: $display;
+}
+
+@mixin position($position, $top: -1, $right: -1, $bottom: -1, $left: -1) {
+  position: $position;
+
+  @if($top != -1){
+    top: $top;
+  }
+  @if($right != -1){
+    right: $right
+  }
+  @if($bottom != -1){
+    bottom: $bottom;
+  }
+  @if($left != -1){
+    left: $left;
+  }
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin setPlaceholderColor($color) {
+  ::-webkit-input-placeholder {
+    color: $color;
+  }
+  ::-moz-placeholder {
+    color: $color;
+  }
+  :-ms-input-placeholder {
+    color: $color;
+  }
+  :-moz-placeholder {
+    color: $color;
+  }
+}
